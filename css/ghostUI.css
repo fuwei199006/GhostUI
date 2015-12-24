@@ -1,0 +1,42 @@
+/* 
+* @Author: wells
+* @Date:   2015-12-24 09:38:07
+* @Last Modified by:   wells
+* @Last Modified time: 2015-12-24 09:38:11
+*/
+    /*#region 多选插件样式*/
+    .w-badge-info {
+        background-color: #1b6aaa !important;
+        color: #fff !important;
+    }
+
+    .w-badge {
+        background-color: #777;
+        border-radius: 10px;
+        color: #fff;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        min-width: 10px;
+        padding: 3px 7px;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+    }
+
+    .filter { margin: 5px; }
+
+    .filter:hover {
+        background-color: #999 !important;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .w-badge-custom {
+        /*font-size: 17px;*/
+        background-color: #fff;
+        color: #0f0f0f;
+    }
+
+    /*#endregion*/
