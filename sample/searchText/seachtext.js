@@ -2,7 +2,7 @@
  * @Author: wells
  * @Date:   2015-12-25 16:03:40
  * @Last Modified by:   wells
- * @Last Modified time: 2015-12-25 17:00:20
+ * @Last Modified time: 2015-12-25 17:45:57
  */
 
 'use strict';
@@ -28,15 +28,19 @@ searchText.prototype = {
 
     },
     _itemClick: function(item, opt) {
+          var li=this.li;
+          var self=this.$self;
         item.click(function() {
-            this.li.removeClass("open");
-            if (opt.onItemsClick) {
+             li.removeClass("open");
+             self.val(item.html());
+            if (opt&&opt.onItemsClick) {
                 opt.onItemsClick(item);
             }
         });
     },
     _initDom: function(data) {
         var ul = this.ul;
+        var self=this;
         if (data.length > 0) {
             $.each(data, function(index, vl) {
                 var list = ul.find("li");
@@ -47,6 +51,7 @@ searchText.prototype = {
                     _a.attr({
                         "value": vl.value
                     });
+                    self._itemClick(_a);
                     _li.append(_a);
                     ul.append(_li);
                 }
@@ -75,7 +80,7 @@ searchText.prototype = {
     },
     _textClick: function() {
         var li=this.li;
-        this.$self.click(function(argument) {
+        this.$self.click(function() {
             // body...
             li.toggleClass("open");
         });
