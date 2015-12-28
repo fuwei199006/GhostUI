@@ -2,7 +2,7 @@
  * @Author: wells
  * @Date:   2015-12-25 16:03:40
  * @Last Modified by:   wells
- * @Last Modified time: 2015-12-25 17:45:57
+ * @Last Modified time: 2015-12-28 09:52:47
  */
 
 'use strict';
@@ -23,40 +23,45 @@ var searchText = function(args) {
 
 searchText.prototype = {
     _initOpts: function(opt) {
-        var opts = $.extend(true, opts, opt);
+        var opts = $.extend(true, _default, opt);
         this._initLogic(opts);
 
     },
     _itemClick: function(item, opt) {
-          var li=this.li;
-          var self=this.$self;
+        var li = this.li;
+        var self = this.$self;
         item.click(function() {
-             li.removeClass("open");
-             self.val(item.html());
-            if (opt&&opt.onItemsClick) {
+            li.removeClass("open");
+            self.val(item.html());
+            if (opt && opt.onItemsClick) {
                 opt.onItemsClick(item);
             }
         });
     },
-    _initDom: function(data) {
+    _initDom: function(data, opt) {
         var ul = this.ul;
-        var self=this;
+        var self = this;
+        var $text=this.$self;
         if (data.length > 0) {
+            ul.empty();
             $.each(data, function(index, vl) {
                 var list = ul.find("li");
-                if (list.length < 10) {
+                if (list.length < opt.showCnt&&vl.text.indexOf($text.val()) !== -1) {
                     var _li = $("<li></li>");
                     var _a = $("<a href='javascript:void(0)'></a>");
                     _a.html(vl.text);
                     _a.attr({
                         "value": vl.value
                     });
-                    self._itemClick(_a);
+                    self._itemClick(_a, opt);
                     _li.append(_a);
                     ul.append(_li);
                 }
             });
         }
+
+         self._textClick();
+         self._textKeyUp(data,opt);
 
 
     },
@@ -67,23 +72,36 @@ searchText.prototype = {
                     filer: ''
                 },
                 function(res) {
-                    this._initDom(res);
+                    this._initDom(res, opt);
                 })
 
         } else {
             if (opt.data) {
-                this._initDom(opt.data);
+                this._initDom(opt.data, opt);
 
 
             }
         }
     },
     _textClick: function() {
-        var li=this.li;
+        var li = this.li;
         this.$self.click(function() {
             // body...
             li.toggleClass("open");
         });
+    },
+    _textKeyUp: function(data,opt) {
+
+        var li = this.li;
+        var $searchtext=this;
+        this.$self.keyup(function(event) {
+            /* Act on the event */
+            li.addClass("open");
+            $searchtext._initDom(data,opt)
+        });
+
+
+
     }
 
 }
@@ -92,7 +110,7 @@ $.fn[showName] = function(option) {
     return this.each(function init(index, value) {
         var searchtext = new searchText(this);
         searchtext._initOpts(option);
-        searchtext._textClick();
+       
     });
 
 
