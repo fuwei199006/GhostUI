@@ -2,7 +2,7 @@
  * @Author: wells
  * @Date:   2015-12-25 16:03:40
  * @Last Modified by:   wells
- * @Last Modified time: 2015-12-28 09:52:47
+ * @Last Modified time: 2015-12-28 12:51:21
  */
 
 'use strict';
@@ -25,7 +25,8 @@ searchText.prototype = {
     _initOpts: function(opt) {
         var opts = $.extend(true, _default, opt);
         this._initLogic(opts);
-
+        this._textClick();
+        this._textKeyUp(opts.data, opts);
     },
     _itemClick: function(item, opt) {
         var li = this.li;
@@ -41,12 +42,12 @@ searchText.prototype = {
     _initDom: function(data, opt) {
         var ul = this.ul;
         var self = this;
-        var $text=this.$self;
+        var $text = this.$self;
         if (data.length > 0) {
             ul.empty();
             $.each(data, function(index, vl) {
                 var list = ul.find("li");
-                if (list.length < opt.showCnt&&vl.text.indexOf($text.val()) !== -1) {
+                if (list.length < opt.showCnt && vl.text.indexOf($text.val()) !== -1) {
                     var _li = $("<li></li>");
                     var _a = $("<a href='javascript:void(0)'></a>");
                     _a.html(vl.text);
@@ -60,8 +61,7 @@ searchText.prototype = {
             });
         }
 
-         self._textClick();
-         self._textKeyUp(data,opt);
+
 
 
     },
@@ -90,14 +90,16 @@ searchText.prototype = {
             li.toggleClass("open");
         });
     },
-    _textKeyUp: function(data,opt) {
+    _textKeyUp: function(data, opt) {
 
         var li = this.li;
-        var $searchtext=this;
+        var $searchtext = this;
         this.$self.keyup(function(event) {
             /* Act on the event */
             li.addClass("open");
-            $searchtext._initDom(data,opt)
+
+            $searchtext._initDom(data, opt)
+            console.log(cnt());
         });
 
 
@@ -110,11 +112,16 @@ $.fn[showName] = function(option) {
     return this.each(function init(index, value) {
         var searchtext = new searchText(this);
         searchtext._initOpts(option);
-       
+
     });
 
 
 };
 
-
+var cnt = (function() {
+    var c = 0;
+    return function() {
+        c++;
+    }
+})();
 //#endregion
