@@ -2,7 +2,7 @@
  * @Author: wells
  * @Date:   2015-12-25 16:03:40
  * @Last Modified by:   wells
- * @Last Modified time: 2015-12-28 12:51:21
+ * @Last Modified time: 2015-12-30 09:39:49
  */
 
 'use strict';
@@ -30,6 +30,7 @@ searchText.prototype = {
     },
     _itemClick: function(item, opt) {
         var li = this.li;
+        // var ul=this.ul;
         var self = this.$self;
         item.click(function() {
             li.removeClass("open");
@@ -38,6 +39,9 @@ searchText.prototype = {
                 opt.onItemsClick(item);
             }
         });
+        li.mouseleave(function(){
+               li.removeClass("open");
+           });
     },
     _initDom: function(data, opt) {
         var ul = this.ul;
@@ -104,6 +108,9 @@ searchText.prototype = {
 
 
 
+    },
+    destroy:function(){
+        this.li.remove();
     }
 
 }
