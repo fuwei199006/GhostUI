@@ -2,7 +2,7 @@
  * @Author: wells
  * @Date:   2015-12-25 16:03:40
  * @Last Modified by:   wells
- * @Last Modified time: 2015-12-30 09:39:49
+ * @Last Modified time: 2015-12-30 13:16:21
  */
 
 'use strict';
@@ -111,7 +111,7 @@ searchText.prototype = {
     },
     destroy:function(){
         this.li.remove();
-    }
+    } 
 
 }
 

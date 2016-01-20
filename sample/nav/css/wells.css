@@ -1,0 +1,183 @@
+/* 
+* @Author: wells
+* @Date:   2015-12-17 09:59:42
+* @Last Modified by:   wells
+* @Last Modified time: 2015-12-17 11:03:34
+*/
+
+.wells-nav {
+    background-color: #fff;
+    border-bottom: 3px solid #e1e1e1;
+    margin-bottom: 35px;
+}
+
+
+ 
+
+.wells-nav .container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+ 
+
+.wells-nav .navbar-nav > li {
+    margin-right: 28px;
+}
+
+
+ 
+
+.wells-nav .navbar-nav > li > a {
+    font-size: 16px;
+    color: #727272;
+}
+
+ 
+
+.wells-nav .navbar-nav > li.active,
+.wells-nav .navbar-nav > li > a:hover {
+    background-color: transparent;
+    margin-bottom: -3px;
+    border-bottom: 3px solid #007BCC;
+}
+
+ 
+
+.wells-nav .navbar-collapse {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.wells-nav .navbar-nav > li.active,
+.wells-nav .navbar-nav > li > a:hover {
+    background-color: transparent;
+    margin-bottom: -2px !important;
+    border-bottom: 2px solid #007BCC !important;
+}
+
+.wells-nav {
+    margin-bottom: 0;
+    border-bottom-width: 2px;
+}
+
+.wells-nav .course_search_form {
+    position: relative;
+}
+
+.wells-nav .course_search_form .search_tip {
+    display: none;
+    position: absolute;
+    background: #fff;
+    color: #999;
+    font-size: 14px;
+    top: 31px;
+    width: 100%;
+    border: 1px solid #fff;
+    border-top: none;
+}
+
+.wells-nav .course_search_form .search_tip .search_tip_list {
+    text-indent: 10px;
+    height: 14px;
+    line-height: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.wells-nav .course_search_form .search_tip .key_word_desc {
+    color: #333;
+    padding: 0 5px;
+}
+
+.wells-nav .container {
+    position: relative;
+    width: 1170px;
+    padding: 0;
+}
+
+.wells-nav .container li.last {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    margin-right: 0;
+}
+
+.wells-nav .container li.last  a {
+    padding: 0;
+    width: 122px;
+    height: 33px;
+    line-height: 33px;
+    background: #63b3cb;
+    color: #fff;
+    text-align: center;
+}
+
+.wells-nav .container li.last a:hover {
+    opacity: 0.9;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    filter: alpha(opacity=90);
+    border-bottom: none;
+}
+
+.wells-nav .container li.course_search {
+    width: 255px;
+    height: 33px;
+    border: 1px solid #e4e4e4;
+    position: absolute;
+    right: -28px;
+    top: 12px;
+}
+
+.wells-nav .container li.nav_my_class {
+    height: 33px;
+    position: absolute;
+    right: 365px;
+    top: 16px;
+    font-size: 16px;
+}
+
+.wells-nav .container li.nav_shopping_cart {
+    height: 33px;
+    position: absolute;
+    right: 253px;
+    top: 16px;
+    font-size: 16px;
+}
+
+.wells-nav .container li img {
+    padding-right: 10px;
+    vertical-align: -5px;
+}
+
+.wells-nav .container li.nav_shopping_cart .cart_num {
+    padding-left: 5px;
+    color: #ef5d53;
+}
+
+.wells-nav .container li.course_search .course_input {
+    padding: 5px 0 5px 10px;
+    width: 215px;
+    border: 0px;
+    display: block;
+    float: left;
+    font-size: 14px;
+    color: #999;
+    outline: none;
+}
+
+.wells-nav .container li.course_search .course_submit {
+    width: 37px;
+    height: 29px;
+    background: url("../images/search_zoom_btn.png") center center no-repeat;
+    border: 0px;
+    display: block;
+    float: left;
+}
+.w-navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
