@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta id='viewport' name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
+		<title></title>
+	</head>
+
+	<body>
+		<div class="nav">
+		 
+		 
+		</div>
+	</body>
+
+</html>
+
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" type="text/css" href="tab.css"/>
+<!-- 引入 jQuery 库 -->
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<!-- 引入 jQuery Mobile 库 -->
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="scroll_tab.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+	 
+	
+	
+</style>
+<script>
+	$(function() {
+		$("div.nav").Tabview({
+			data: [{
+				text: "aaa",
+				value: "aaa"
+			},{
+				text: "bbb",
+				value: "bbb"
+			},{
+				text: "ccc",
+				value: "ccc"
+			},{
+				text: "ddd",
+				value: "ddd"
+			},{
+				text: "eee",
+				value: "eee"
+			}],
+		});
+		//		$("div.nav").on("swipeleft", function() {
+		//			var firstli = $(this).find("div:eq(0)")
+		//			firstli.hide(1000, () => {
+		//				firstli.remove();
+		//				firstli.show();
+		//				$(this).append(firstli);
+		//			});
+		//		});
+		//		$("ul").on("swiperight", function() {
+		//			//			var firstli = $(this).find("li:last-of-type")
+		//			//			 
+		//			//			firstli.hide(1000)
+		//			//			$(this).append(firstli);
+		//			//			firstli.show(1000);
+		//		});
+	});
+</script>
