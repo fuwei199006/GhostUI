@@ -36,7 +36,7 @@
 			this.$element.on("swipeleft", function() {
 				var firstdiv = $(this).find("div:eq(0)")
 				if(firstdiv.hasClass("active")){
-					$(this).find("div:eq(1)").click();
+					$(this).find("div:eq(1)").addClass("active").siblings().removeClass("active");
 				}
 				firstdiv.hide(1000, () => {
 					firstdiv.remove();
@@ -79,7 +79,13 @@
 		},
 		_isInNav:function(item){
 			var index=this.$element.indexOf(item);
-//			if(
+ 			var left=item.position().left;
+ 			var width=item.width();
+ 			var cWidth=document.clientWidth;
+ 			if(left+width>cWidth){
+ 				alert("ok")
+
+ 			}
 			
 		}
 
