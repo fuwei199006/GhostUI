@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div style="border:1px solid black;height:100px" id="swipDiv"></div>
+</body>
+
+</html>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="swipe.js"></script>
+<script>
+(function() {
+
+    
+    var swipeDiv = $.swipeInit($("#swipDiv"));
+    swipeDiv.on("swipeleft", function() {
+        alert("left");
+    });
+    swipeDiv.on("swiperight", function() {
+        alert("right");
+    });
+
+     swipeDiv.on("up", function() {
+        alert("up");
+    });
+
+       swipeDiv.on("down", function() {
+        alert("down");
+    });
+})();
+</script>

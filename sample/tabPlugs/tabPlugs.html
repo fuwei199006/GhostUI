@@ -17,13 +17,11 @@
 
 </html>
 
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
 <link rel="stylesheet" type="text/css" href="tab.css"/>
 <!-- 引入 jQuery 库 -->
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-
-<!-- 引入 jQuery Mobile 库 -->
-<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="../js/jquery.touchSwipe.js" type="text/javascript" charset="utf-8"></script>
 <script src="scroll_tab.js" type="text/javascript" charset="utf-8"></script>
 
 <style>
@@ -35,21 +33,22 @@
 	$(function() {
 		$("div.nav").Tabview({
 			data: [{
-				text: "aaa",
-				value: "aaa"
-			},{
-				text: "bbb",
-				value: "bbb"
-			},{
-				text: "ccc",
-				value: "ccc"
-			},{
-				text: "ddd",
-				value: "ddd"
-			},{
-				text: "eee",
-				value: "eee"
-			}],
+					text: "过夜OCC",
+					value: 1
+				}, {
+					text: "过夜无从折扣率",
+					value: 2
+				}, {
+					text: "免升%",
+					value: 3
+				}, {
+					text: "负调账",
+					value: 4
+				}, {
+					text: "优惠123",
+					value: 5
+				}],
+				scroll: true
 		});
 		//		$("div.nav").on("swipeleft", function() {
 		//			var firstli = $(this).find("div:eq(0)")
