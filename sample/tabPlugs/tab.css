@@ -1,32 +1,28 @@
-.nav {
-		overflow-x: hidden;
-		width: 200%;
-		overflow-y: hidden;
-		height: 45px;
-		line-height: 44px;
-		margin-left: 15px;
-		margin-right: 15px;
-	}
-	
-	.nav div {
-		width: 12%;
-		list-style: none;
-		float: left;
-		overflow-y: hidden;
-		display: inline;
-		float: left;
-		list-style-type: none;
-		color: #BFBFBF;
-		font-size: 1.1em;
-		text-align: center;
-		margin-left: 0;
-		display: inline;
-		height: auto;
-		word-break: break-all;
-		word-wrap: break-word;
-	}
-	
-	.nav div.active {
-		color: #0067b1;
-		border-bottom: 2px solid #0067B1;
-	}
+.navdiv {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	width: 200%;
+	height: 45px;
+	line-height: 43px;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	margin-bottom: 5px;
+}
+
+.navdiv div {
+	width: 12%;
+	list-style: none;
+	float: left;
+	display: inline;
+	float: left;
+	color: #BFBFBF;
+	text-align: center;
+	overflow-x: auto;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.navdiv div.active {
+	color: #0067b1;
+	border-bottom: 2px solid #0067B1;
+}

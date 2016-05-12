@@ -5,6 +5,7 @@
 	}
 	var pluginName = "Tabview";
 	var Tab = function(element, options) {
+		$(element).html();
 		this.$element = $(element);
 		this.element = element;
 
@@ -15,7 +16,8 @@
 		OnLeftScroll: undefine,
 		OnRigthScroll: undefine,
 		OnTabClick: undefine,
-		OnItemClick:undefine
+		OnItemClick: undefine,
+		OnChange: undefine
 	};
 	Tab.prototype = {
 		_init: function(options) {
@@ -28,67 +30,125 @@
 			}
 
 			this.options = $.extend({}, Tab.default, options)
+			this._offEvent();
 			this._bindEvent();
 			this._render();
 		},
 		_bindEvent: function() {
-			var $tab=this;
-			this.$element.on("swipeleft", function() {
-				var firstdiv = $(this).find("div:eq(0)")
-				if(firstdiv.hasClass("active")){
-					$(this).find("div:eq(1)").click();
+			var $tab = this;
+			if (!$tab.options.scroll) return false;
+			var isTouchMove, startTx, startTy;
+			$tab.$element.on('touchstart', function(e) {
+				var touches = e.originalEvent.targetTouches[0];
+				startTx = touches.clientX;
+				startTy = touches.clientY;
+				isTouchMove = false;
+			});
+			$tab.$element.on('touchmove', function(e) {
+				isTouchMove = true;
+				e.preventDefault();
+			});
+			$tab.$element.on('touchend', function(e) {
+				if (!isTouchMove) {
+					return;
 				}
-				firstdiv.hide(1000, () => {
-					firstdiv.remove();
-					firstdiv.show();
-					$(this).append(firstdiv);
-				});
-				if ($tab.options.OnLeftScroll) {
-					$tab.options.OnLeftScroll(firstdiv);
-				}
-			}).on("swiperight", function() {
-				var lastdiv = $(this).find("div:last-of-type")
-				if(lastdiv.hasClass("active")){
-					$(this).find("div:eq(1)").click();
-				}
-				lastdiv.hide();
-				lastdiv.remove();
-				$(this).prepend(lastdiv);
-				lastdiv.show(1000);
-				if ($tab.options.onRightScroll) {
-					$tab.options.onRightScroll(lastdiv);
+				var touches = e.originalEvent.changedTouches[0],
+					endTx = touches.clientX,
+					endTy = touches.clientY,
+					distanceX = startTx - endTx,
+				distanceY = startTy - endTy,
+					isSwipe = false;
+				if (Math.abs(distanceX) >= Math.abs(distanceY)) {
+					if (distanceX > 20) {
+						var firstdivs = $(this).find("div:visible");
+						if(firstdivs.length===1)return false;
+						var firstdiv=$(firstdivs[0]);
+						if (firstdiv.hasClass("active")) {
+							firstdiv.next().addClass("active").siblings().removeClass("active");
+							if ($tab.options.OnChange) {
+								$tab.options.OnChange(firstdiv);
+							}
+						}
+						firstdiv.hide(100, function() {
+						 
+							firstdiv.on("click", function() {
+								if ($tab.options.OnItemClick) {
+									$tab.options.OnItemClick($(this));
+								}
+								$(this).addClass("active").siblings().removeClass("active");
+							});
+						});
+						if ($tab.options.OnLeftScroll) {
+							$tab.options.OnLeftScroll(firstdiv);
+						}
+						isSwipe = true;
+					} else if (distanceX < -20) {
+					 
+						var lastdiv = $(this).find("div:hidden:last");
+						var activeDiv = $(this).find(".active");
+ 
+						lastdiv.show(100, function() {
+							if ($tab.options.onRightScroll) {
+								$tab.options.onRightScroll(lastdiv);
+							}
+							if (!$tab._isInNav(activeDiv)) {
+								activeDiv.prev().addClass("active").siblings().removeClass("active");
+								if ($tab.options.OnChange) {
+									$tab.options.OnChange(activeDiv);
+								}
+							}
+						});
+						lastdiv.on("click", function() {
+							if ($tab.options.OnItemClick) {
+								$tab.options.OnItemClick($(this));
+							}
+							$(this).addClass("active").siblings().removeClass("active");
+						});
+						isSwipe = true;
+					}
 				}
 			});
+
 		},
 		_render: function() {
-			var $tab=this;
-			this.$element.css("width", this.items.length * 25 + "%")
-			$.each(this.items, (x, y) => {
-				
-				var $div = $("<div></div>").css("width", "21.5%").click(function(){
-					if($tab.options.OnItemClick){
+			var $tab = this;
+			this.$element.html('');
+			this.$element.css("width", $tab.options.tWidth || this.items.length * 25 + "%").addClass("navdiv")
+			$.each(this.items, function(x, y) {
+
+				var $div = $("<div></div>").css("width", $tab.options.itemWidth || "21.5%").on("click", function() {
+					if ($tab.options.OnItemClick) {
 						$tab.options.OnItemClick($(this));
 					}
 					$(this).addClass("active").siblings().removeClass("active");
 				});
-				if(x===0)$div.addClass("active");
-				this.$element.append($div.text(y.text).attr({
+				if (x === 0) $div.addClass("active");
+				$tab.$element.append($div.html(y.text).attr({
 					"data-value": y.value
 				}));
 			});
 		},
-		_isInNav:function(item){
-			var index=this.$element.indexOf(item);
-//			if(
-			
+		_isInNav: function(item) {
+			//var index = this.$element.indexOf(item);
+			var clientWd = $(document).width();
+			var itemWd = item.width();
+			var xDis = item.position().left;
+			if (itemWd + xDis > clientWd) {
+				return false;
+			}
+			return true;
+
+		},
+		_offEvent:function(){
+		   this.$element.off();
 		}
 
 	}
-	$.fn[pluginName] = function(options, args) {
+	$.fn[pluginName] = function(options, args,index) {
 
-		return this.each(() => {
+		return this.each(function() {
 
-			var self = $.data(this, 'plugin_' + pluginName); //取数据
+			var self = $.data(this, 'plugin_' +index+ pluginName); //取数据
 			if (typeof options === 'string') { //如果参数的类型是字符类型 说明调用的是函数
 				if (!self) {
 					logError('没有初始化组件 : ' + options); //如果self没有值 没有初始化
